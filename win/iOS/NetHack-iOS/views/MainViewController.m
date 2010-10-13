@@ -48,6 +48,7 @@
 #import "QuestionViewController.h"
 #import "NhStatus.h"
 #import "StatusView.h"
+#import "StatsView.h"
 #import "LayeredActionBar.h"
 
 #import "winios.h" // ios_getpos etc.
@@ -267,7 +268,7 @@ enum rotation_lock {
 		static BOOL actionBarInitialized = NO;
 		// build action bar
 		if (!actionBarInitialized) {
-			NSMutableArray *actions = [NSMutableArray arrayWithCapacity:5];
+			NSMutableArray *actions = [NSMutableArray arrayWithCapacity:10];
 			[actions addObject:[NhCommand commandWithTitle:"Wait" key:'.']];
 			[actions addObject:[NhCommand commandWithTitle:"Search" keys:"9s"]];
 			[actions addObject:[NhCommand commandWithTitle:"Redo" key:C('a')]];
@@ -310,6 +311,7 @@ enum rotation_lock {
 		[self performSelectorOnMainThread:@selector(refreshMessages) withObject:nil waitUntilDone:NO];
 	} else {
 		[statusView update];
+		[statsView update];
 		messageView.text = [[NhWindow messageWindow] textWithDelimiter:@" "];
 	}
 }

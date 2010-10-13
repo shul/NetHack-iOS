@@ -38,11 +38,13 @@
 @class ActionBar;
 @class LayeredActionBar;
 @class StatusView;
+@class StatsView;
 
 @interface MainViewController : UIViewController <UITextFieldDelegate> {
 
 	IBOutlet MessageView *messageView;
 	IBOutlet StatusView *statusView;
+	IBOutlet StatsView *statsView;
 	IBOutlet MapView *mapView;
 	IBOutlet ActionBar *actionBar;
 	IBOutlet LayeredActionBar *layeredActionBar;

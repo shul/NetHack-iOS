@@ -49,7 +49,7 @@
 
 - (void)drawRect:(CGRect)rect {
 	if (!program_state.gameover && program_state.something_worth_saving) {
-		float space = 5.0f;
+		//float space = 5.0f;
 		UIFont *font = nil;
 		if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
 			font = [UIFont systemFontOfSize:16.0f];
@@ -61,7 +61,7 @@
 		CGContextSetFillColorWithColor(ctx, [UIColor whiteColor].CGColor);
 		NSArray *messages = [status messages];
 		NSString *bot1 = [messages objectAtIndex:0];
-		NSString *bot2 = [messages objectAtIndex:1];
+		//NSString *bot2 = [messages objectAtIndex:1];
 		CGPoint p = CGPointMake(5.0f, 0.0f);
 		CGSize size = [bot1 drawAtPoint:p withFont:font];
 		p.y += size.height;
@@ -73,7 +73,7 @@
 			}
 		}
 		
-		size = [bot2 drawAtPoint:p withFont:font];
+		/*size = [bot2 drawAtPoint:p withFont:font];
 		
 		p.x += size.width + space;
 		if (status.hungryState != 1) {
@@ -91,7 +91,7 @@
 			CGContextSetFillColorWithColor(ctx, [UIColor redColor].CGColor);
 			NSString *info = [NSString stringWithCString:status.status encoding:NSASCIIStringEncoding];
 			[info drawAtPoint:p withFont:font];
-		}
+		}*/
 	}
 }
 

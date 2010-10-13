@@ -114,17 +114,17 @@ void trimStringInPlace(char *s) {
 
 	NSString *bot1 = nil;
 	
-	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-		bot1 = [NSString stringWithFormat:@"%s Str:%s Dx:%u Con:%u Int:%u Wis:%u Cha:%u %s",
-				nameAndTitle, strength, dexterity, constitution, intelligence, wisdom, charisma, alignment];
-	} else {
+	/*if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+		bot1 = [NSString stringWithFormat:@"Str:%s Dx:%u Con:%u Int:%u Wis:%u Cha:%u %s",
+				 strength, dexterity, constitution, intelligence, wisdom, charisma, alignment];
+	} else {*/
 		bot1 = [NSString stringWithFormat:@"Str:%s Dx:%u Con:%u Int:%u Wis:%u Cha:%u %s",
 				strength, dexterity, constitution, intelligence, wisdom, charisma, alignment];
-	}
+	//}
 
-	NSString *bot2 = [NSString stringWithFormat:@"%s $%d Hp:%u/%u Pw:%u/%u AC:%d XP:%u T:%u %s",
-					  level, money, hitpoints, maxHitpoints, power, maxPower, ac, xlvl, turn, status];
-	return [NSArray arrayWithObjects:bot1, bot2, nil];
+	/*NSString *bot2 = [NSString stringWithFormat:@"%s $%d Hp:%u/%u Pw:%u/%u AC:%d XP:%u T:%u %s",
+					  level, money, hitpoints, maxHitpoints, power, maxPower, ac, xlvl, turn, status];*/
+	return [NSArray arrayWithObjects:bot1, nil];
 }
 
 extern const char *rank();
