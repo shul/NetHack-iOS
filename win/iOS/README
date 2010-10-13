@@ -1,7 +1,9 @@
+-- This is the iPad oriented fork of Dirkz's excellent iOS port. I will try out UI in this fork --
+
 How to get the sources
 
-http://github.com/dirkz/NetHack-iOS
-http://github.com/dirkz/NetHack-iOS.git
+http://github.com/shul/NetHack-iOS
+http://github.com/shul/NetHack-iOS.git
 
 You probably already have checked it out, if not, here's how to do it:
 
@@ -22,3 +24,4 @@ If you now set your target to debug and simulator the project should
 build. Warnings can be ignored unless they are in the UI code.
 
 This worked 2010-10-05 with xcode 3.2.4 / iOS 4.1 (Dirk)
+This worked 2010-10-13 with xcode 3.5 / iOS 4.2 beta 3 on iPad (shul)
