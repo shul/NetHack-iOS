@@ -256,6 +256,16 @@ static BOOL s_doubleTapsEnabled = NO;
 		ZTouchInfo *ti = [touchInfoStore touchInfoForTouch:touch];
 		if (!ti.moved && !ti.pinched) {
 			CGPoint p = [touch locationInView:self];
+			
+			// check that mainviewcontroller's leftpad and rightpad are not pressed:
+			MainViewController *instance = [MainViewController instance];
+
+			
+			if (CGRectContainsPoint([instance.leftPad frame], p) || CGRectContainsPoint([instance.rightPad frame], p)) {
+				return;
+			}
+			// ----
+			
 			if (!self.panned && !ios_getpos) {
 				CGPoint center = CGPointMake(self.bounds.size.width/2, self.bounds.size.height/2);
 				CGPoint delta = CGPointMake(p.x-center.x, center.y-p.y);

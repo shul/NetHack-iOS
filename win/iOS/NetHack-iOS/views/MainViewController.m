@@ -59,6 +59,8 @@ static MainViewController* instance;
 
 @implementation MainViewController
 
+@synthesize leftPad,rightPad;
+
 enum rotation_lock {
 	none, portrait, landscape
 } g_rotationLock;
@@ -195,6 +197,11 @@ enum rotation_lock {
 	[self showActionMenu:commands sender:sender dismiss:YES];
 }
 
+- (IBAction)movePressed:(id)sender
+{
+	[self moveMenuAction:nil];
+}
+
 - (UIBarButtonItem *)buttonWithTitle:(NSString *)title target:(id)target action:(SEL)action {
 	return [[[UIBarButtonItem alloc] initWithTitle:title
 											 style:UIBarButtonItemStyleBordered target:target action:action] autorelease];
@@ -203,6 +210,105 @@ enum rotation_lock {
 - (IBAction)toggleMessageView:(id)sender {
 	[messageView toggleMessageHistory:sender];
 }
+
+- (IBAction)moveKeyPress:(id)sender
+{
+	if (sender == up) {
+			[self handleDirectionTap:kDirectionUp];
+	} else if (sender == down) {
+			[self handleDirectionTap:kDirectionDown];
+	} else if (sender == left) {
+			[self handleDirectionTap:kDirectionLeft];
+	} else if (sender == right) {
+			[self handleDirectionTap:kDirectionRight];
+	} else if (sender == upleft) {
+			[self handleDirectionTap:kDirectionUpLeft];
+	} else if (sender == upright) {
+			[self handleDirectionTap:kDirectionUpRight];
+	} else if (sender == downleft) {
+			[self handleDirectionTap:kDirectionDownLeft];
+	} else if (sender == downright) {
+			[self handleDirectionTap:kDirectionDownRight];
+	}
+}
+
+- (IBAction)selfPressed:(id)sender
+{
+	UIButton *pressed = (UIButton *)sender;
+	
+	NSArray *commands = [NhCommand currentCommands];
+
+	[self showActionMenu:commands mapViewRect:[pressed.superview frame] dismiss:YES];
+}
+
+- (IBAction)firePressed:(id)sender
+{
+	[[NhCommand commandWithTitle:"Fire" key:'f'] invoke:sender];
+}
+
+
+
+- (IBAction)castPressed:(id)sender
+{
+		[[NhCommand commandWithTitle:"Cast" key:'Z'] invoke:sender];
+}
+
+
+- (IBAction)eatPressed:(id)sender
+{
+	[[NhCommand commandWithTitle:"Eat" key:'e'] invoke:sender];
+}
+
+- (IBAction)extPressed:(id)sender
+{
+	[[NhCommand commandWithTitle:"#Ext" key:'#'] invoke:sender];
+}
+
+- (IBAction)altPressed:(id)sender
+{
+	[[NhCommand commandWithTitle:"Alt" key:'x'] invoke:sender];
+}
+
+- (IBAction)waitPressed:(id)sender
+{
+	[[NhCommand commandWithTitle:"Wait" key:'.'] invoke:sender];
+}
+
+- (IBAction)redoPressed:(id)sender
+{
+	[[NhCommand commandWithTitle:"Redo" key:C('a')] invoke:sender];
+}
+
+- (IBAction)toolsPressed:(id)sender
+{
+	[self toolsMenuAction:nil];
+}
+
+- (IBAction)searchPressed:(id)sender
+{
+	[[NhCommand commandWithTitle:"Search" keys:"9s"] invoke:sender];
+}
+
+- (IBAction)invPressed:(id)sender
+{
+	[self inventoryMenuAction:nil];
+}
+
+- (IBAction)infoPressed:(id)sender
+{
+	[self infoMenuAction:nil];
+}
+
+- (IBAction)tilesPressed:(id)sender
+{
+	[self tilesetMenuAction:nil];
+}
+
+- (IBAction)wizPressed:(id)sender
+{
+	[self wizardMenuAction:nil];
+}
+
 
 #pragma mark view controller properties
 
@@ -633,6 +739,15 @@ enum rotation_lock {
 
 - (void)handleMapTapTileX:(int)x y:(int)y forLocation:(CGPoint)p inView:(UIView *)view {
 	//DLog(@"tap on %d,%d (u %d,%d)", x, y, u.ux, u.uy);
+	
+	// check that the leftPad or rightPad area is not pressed
+	
+	if (CGRectContainsPoint([leftPad frame], p) || CGRectContainsPoint([rightPad frame], p)) {
+		return;
+	}
+	
+	// ---
+	
 	if (directionQuestion) {
 		if (u.ux != x || u.uy != y) {
 			// taps on self are ignored, they are very amibigious (<,>,. ?)
@@ -897,6 +1012,8 @@ enum rotation_lock {
 		[[NhEventQueue instance] addKey:-1];
 	}
 }
+
+
 
 #pragma mark memory
 

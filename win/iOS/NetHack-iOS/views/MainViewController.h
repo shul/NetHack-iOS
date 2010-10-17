@@ -50,6 +50,22 @@
 	IBOutlet LayeredActionBar *layeredActionBar;
 	IBOutlet UIScrollView *actionScrollView;
 	
+	IBOutlet UIButton *up;
+	IBOutlet UIButton *down;
+	IBOutlet UIButton *left;
+	IBOutlet UIButton *right;
+	IBOutlet UIButton *upleft;
+	IBOutlet UIButton *upright;
+	IBOutlet UIButton *downleft;
+	IBOutlet UIButton *downright;
+	
+	IBOutlet UIButton *firebutton;
+	IBOutlet UIButton *movebutton;
+	IBOutlet UIButton *castbutton;
+	
+	IBOutlet UIView *leftPad;
+	IBOutlet UIView *rightPad;
+	
 	NhYnQuestion *currentYnQuestion;
 	InventoryViewController *inventoryViewController;
 	UINavigationController *inventoryNavigationController;
@@ -78,6 +94,9 @@
 @property (readonly) TileSetViewController *tileSetViewController;
 @property (readonly) ToolsViewController *toolsViewController;
 
+@property (readonly) UIView *leftPad;
+@property (readonly) UIView *rightPad;
+
 // inventory currently shown?
 @property (readonly) BOOL isInventoryShown;
 
@@ -88,6 +107,23 @@
 // actions
 
 - (IBAction)toggleMessageView:(id)sender;
+- (IBAction)moveKeyPress:(id)sender;
+- (IBAction)selfPressed:(id)sender;
+- (IBAction)firePressed:(id)sender;
+- (IBAction)movePressed:(id)sender;
+- (IBAction)castPressed:(id)sender;
+
+- (IBAction)eatPressed:(id)sender;
+- (IBAction)extPressed:(id)sender;
+- (IBAction)altPressed:(id)sender;
+- (IBAction)waitPressed:(id)sender;
+- (IBAction)redoPressed:(id)sender;
+- (IBAction)toolsPressed:(id)sender;
+- (IBAction)searchPressed:(id)sender;
+- (IBAction)invPressed:(id)sender;
+- (IBAction)infoPressed:(id)sender;
+- (IBAction)tilesPressed:(id)sender;
+- (IBAction)wizPressed:(id)sender;
 
 #pragma mark window API
 
@@ -168,5 +204,7 @@
 
 // places/aligns the action bar on the screen
 - (void)placeActionBar:(UIView *)actionBar;
+
+
 
 @end
