@@ -158,7 +158,7 @@ enum rotation_lock {
 						 [NhCommand commandWithTitle:"Explore mode" key:'X'],
 						 [NhCommand commandWithTitle:"Call Monster" key:'C'],
 						 nil];
-	[self showActionMenu:commands actionBarRect:[(NSValue *) sender CGRectValue] dismiss:YES];
+	[self showActionMenu:commands actionBarRect:[(UIButton *) sender frame] dismiss:YES button:(UIButton *)sender];
 }
 
 - (void)tilesetMenuAction:(id)sender {
@@ -199,7 +199,7 @@ enum rotation_lock {
 
 - (IBAction)movePressed:(id)sender
 {
-	[self moveMenuAction:nil];
+	[self moveMenuAction:sender];
 }
 
 - (UIBarButtonItem *)buttonWithTitle:(NSString *)title target:(id)target action:(SEL)action {
@@ -238,7 +238,7 @@ enum rotation_lock {
 	
 	NSArray *commands = [NhCommand currentCommands];
 
-	[self showActionMenu:commands mapViewRect:[pressed.superview frame] dismiss:YES];
+	[self showActionMenu:commands mapViewRect:[rightPad convertRect:pressed.frame toView:mapView] dismiss:YES];
 }
 
 - (IBAction)firePressed:(id)sender
@@ -281,7 +281,7 @@ enum rotation_lock {
 
 - (IBAction)toolsPressed:(id)sender
 {
-	[self toolsMenuAction:nil];
+	[self toolsMenuAction:sender];
 }
 
 - (IBAction)searchPressed:(id)sender
@@ -296,7 +296,7 @@ enum rotation_lock {
 
 - (IBAction)infoPressed:(id)sender
 {
-	[self infoMenuAction:nil];
+	[self infoMenuAction:sender];
 }
 
 - (IBAction)tilesPressed:(id)sender
@@ -880,8 +880,10 @@ enum rotation_lock {
 - (void)displayPopoverWithController:(UIViewController *)controller sender:(id)sender {
 	UIPopoverController *popover = [self popoverWithController:controller];
 	[popover setPopoverContentSize:popover.contentViewController.contentSizeForViewInPopover];
-	CGRect rect = [(NSValue *) sender CGRectValue];
-	rect = [self.view convertRect:rect fromView:layeredActionBar];
+	CGRect rect = [(UIButton *) sender frame];
+	//rect = [self.view convertRect:rect fromView:layeredActionBar];
+	rect = [leftPad convertRect:rect fromView:mapView];
+	rect = [leftPad frame];
 	[popover presentPopoverFromRect:rect inView:mapView
 		   permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
@@ -894,8 +896,8 @@ enum rotation_lock {
 }
 
 - (void)showActionMenu:(NSArray *)actions sender:(id)sender dismiss:(BOOL)dismiss {
-	CGRect r = [(NSValue *) sender CGRectValue];
-	[self showActionMenu:actions actionBarRect:r dismiss:dismiss];
+	CGRect r = [(UIButton *) sender frame];
+	[self showActionMenu:actions actionBarRect:r dismiss:dismiss button:(UIButton *)sender];
 }
 
 - (void)showActionMenu:(NSArray *)actions mapViewRect:(CGRect)rect {
@@ -920,9 +922,10 @@ enum rotation_lock {
 	}
 }
 
-- (void)showActionMenu:(NSArray *)actions actionBarRect:(CGRect)rect dismiss:(BOOL)dismiss {
+- (void)showActionMenu:(NSArray *)actions actionBarRect:(CGRect)rect dismiss:(BOOL)dismiss button:(UIButton *)button {
 	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-		rect = [layeredActionBar convertRect:rect toView:mapView];
+		rect = [button.superview convertRect:rect toView:mapView];
+		//rect = [leftPad frame];
 	}
 	[self showActionMenu:actions mapViewRect:rect dismiss:dismiss];
 }

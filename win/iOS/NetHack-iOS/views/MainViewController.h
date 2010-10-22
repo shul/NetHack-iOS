@@ -179,7 +179,7 @@
 - (void)showActionMenu:(NSArray *)actions mapViewRect:(CGRect)rect dismiss:(BOOL)dismiss;
 
 // method when your rect comes from the action bar
-- (void)showActionMenu:(NSArray *)actions actionBarRect:(CGRect)rect dismiss:(BOOL)dismiss;
+- (void)showActionMenu:(NSArray *)actions actionBarRect:(CGRect)rect dismiss:(BOOL)dismiss button:(UIButton *)button;
 
 // dismisses the given popover without animation, used for selector methods
 // that usually don't work gracefully with the original method (because of the BOOL param)
