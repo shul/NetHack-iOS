@@ -213,6 +213,7 @@ enum rotation_lock {
 
 - (IBAction)moveKeyPress:(id)sender
 {
+	
 	if (sender == up) {
 			[self handleDirectionTap:kDirectionUp];
 	} else if (sender == down) {
@@ -230,6 +231,27 @@ enum rotation_lock {
 	} else if (sender == downright) {
 			[self handleDirectionTap:kDirectionDownRight];
 	}
+
+	// the following is nice, but you can't attack:
+	/*
+	if (sender == up) {
+		[self handleDirectionDoubleTap:kDirectionUp];
+	} else if (sender == down) {
+		[self handleDirectionDoubleTap:kDirectionDown];
+	} else if (sender == left) {
+		[self handleDirectionDoubleTap:kDirectionLeft];
+	} else if (sender == right) {
+		[self handleDirectionDoubleTap:kDirectionRight];
+	} else if (sender == upleft) {
+		[self handleDirectionDoubleTap:kDirectionUpLeft];
+	} else if (sender == upright) {
+		[self handleDirectionDoubleTap:kDirectionUpRight];
+	} else if (sender == downleft) {
+		[self handleDirectionDoubleTap:kDirectionDownLeft];
+	} else if (sender == downright) {
+		[self handleDirectionDoubleTap:kDirectionDownRight];
+	}*/
+	
 }
 
 - (IBAction)selfPressed:(id)sender
