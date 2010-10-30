@@ -108,6 +108,7 @@
 
 - (IBAction)toggleMessageView:(id)sender;
 - (IBAction)moveKeyPress:(id)sender;
+- (IBAction) doubleClick:(id)sender;
 - (IBAction)selfPressed:(id)sender;
 - (IBAction)firePressed:(id)sender;
 - (IBAction)movePressed:(id)sender;

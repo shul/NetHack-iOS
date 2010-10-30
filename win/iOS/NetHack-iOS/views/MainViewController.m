@@ -231,9 +231,12 @@ enum rotation_lock {
 	} else if (sender == downright) {
 			[self handleDirectionTap:kDirectionDownRight];
 	}
+	
+}
 
-	// the following is nice, but you can't attack:
-	/*
+
+- (IBAction) doubleClick:(id)sender
+{
 	if (sender == up) {
 		[self handleDirectionDoubleTap:kDirectionUp];
 	} else if (sender == down) {
@@ -250,9 +253,9 @@ enum rotation_lock {
 		[self handleDirectionDoubleTap:kDirectionDownLeft];
 	} else if (sender == downright) {
 		[self handleDirectionDoubleTap:kDirectionDownRight];
-	}*/
-	
+	}
 }
+
 
 - (IBAction)selfPressed:(id)sender
 {
